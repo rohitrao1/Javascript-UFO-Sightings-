@@ -1,4 +1,41 @@
-// from data.js
 var tableData = data;
+var tbody = d3.select("tbody");
 
-// YOUR CODE HERE!
+tableData.forEach(function(sighting) {
+    var row = tbody.append("tr");
+    Object.entries(sighting).forEach(function([key, value]) {
+        var cell = row.append("td");
+        cell.text(value);
+    });
+}); 
+
+var dateFilter = d3.select("#filter-btn");
+
+dateFilter.on("click", function() {
+    d3.event.preventDefault();
+
+    var inputElement = d3.select("#datetime");
+    var inputValue = inputElement.property("value");
+    // var filteredTable = tableData.filter(dates => Object.values(dates) === inputValue);
+    var filteredTable = tableData.filter(dates => dates.datetime === inputValue);
+    // var filteredTable = tableData.filter(dates => Date.parse(dates.datetime) === Date.parse(inputValue));
+    /*
+    Object.keys(tableData).map(function(objectKey, index) {
+        var value = object[objectKey];
+        console.log(value);
+    });
+    */
+
+    d3.selectAll("td").remove();
+    filteredTable.forEach(function(sighting) {
+        var row = tbody.append("tr");
+        Object.entries(sighting).forEach(function([key, value]) {
+            var cell = row.append("td");
+            cell.text(value);
+        });
+    });
+});
+
+
+
+
