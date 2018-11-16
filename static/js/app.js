@@ -16,15 +16,7 @@ dateFilter.on("click", function() {
 
     var inputElement = d3.select("#datetime");
     var inputValue = inputElement.property("value");
-    // var filteredTable = tableData.filter(dates => Object.values(dates) === inputValue);
     var filteredTable = tableData.filter(dates => dates.datetime === inputValue);
-    // var filteredTable = tableData.filter(dates => Date.parse(dates.datetime) === Date.parse(inputValue));
-    /*
-    Object.keys(tableData).map(function(objectKey, index) {
-        var value = object[objectKey];
-        console.log(value);
-    });
-    */
 
     d3.selectAll("td").remove();
     filteredTable.forEach(function(sighting) {
